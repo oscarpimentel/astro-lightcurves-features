@@ -1,0 +1,8 @@
+numpy
+matplotlib
+scipy
+Cython
+joblib
+imbalanced-learn
+umap-learn
+pandas
