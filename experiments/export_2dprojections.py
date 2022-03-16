@@ -31,8 +31,8 @@ lcdataset.only_keep_kf(main_args.kf) # saves ram
 ###################################################################################################################################################
 import numpy as np
 import matplotlib.pyplot as plt
-from lcfats.projs import get_fitted_2dproj
-from lcfats.plots.projs import plot_2dproj
+from lcfeatures.projs import get_fitted_2dproj
+from lcfeatures.plots.projs import plot_2dproj
 from fuzzytools.progress_bars import ProgressBar
 from fuzzytools.matplotlib.utils import save_fig
 from fuzzytools.strings import get_string_from_dict
@@ -45,10 +45,12 @@ for proj_mode,features_mode in [('UMAP', 'all'), ('UMAP', 'spm'), ('PCA', 'spm')
 	class_names = lcdataset[lcset_name].class_names
 	for target_class in [None]+class_names:
 		fig = plot_2dproj(proj_dict, lcdataset, lcset_name, target_class)
+		train_mode = 'r+s'
+		save_rootdir = f'../save'
 		if target_class is None:
-			save_filedir = f'../save/projections/{cfilename}/{lcset_name}/proj_mode={proj_mode}~features_mode={features_mode}/id={main_args.mid}.pdf'
+			save_filedir = f'{save_rootdir}/method={main_args.method}~tmode={train_mode}~fmode={features_mode}/projections/{cfilename}/{lcset_name}/proj_mode={proj_mode}/id={main_args.mid}.pdf'
 		else:
-			save_filedir = f'../save/projections/{cfilename}/{lcset_name}/proj_mode={proj_mode}~features_mode={features_mode}/{target_class}/id={main_args.mid}.pdf'
+			save_filedir = f'{save_rootdir}/method={main_args.method}~tmode={train_mode}~fmode={features_mode}/projections/{cfilename}/{lcset_name}/proj_mode={proj_mode}/{target_class}/id={main_args.mid}.pdf'
 		
 		fig.tight_layout()
 		save_fig(fig, save_filedir)

@@ -29,9 +29,12 @@ def preprocess_lcobj(_lcobj, band_names, thday,
 	lightcurve = DFBuilder()
 	band_d = {'g':1, 'r':2}
 	lengths = {}
+
+	lcobj.reset_day_offset_serial() # remove day offset!
+	lcobj.clip_attrs_given_max_day(thday) # clip by max day
+
 	for b in band_names:
 		lcobjb = lcobj.get_b(b)
-		lcobjb.clip_attrs_given_max_day(thday) # clip by max day
 		lengths[f'_len_{b}'] = len(lcobjb)
 		for k in range(0, len(lcobjb)):
 			lightcurve.append(f'{b}.{k}', {
@@ -42,7 +45,7 @@ def preprocess_lcobj(_lcobj, band_names, thday,
 				'sigmapsf':lcobjb.obse[k],
 				'error':lcobjb.obse[k],
 				'band':band_d[b] if uses_band_d else b,
-				'isdiffpos':1, # patch
+				'isdiffpos':1,
 				})
 
 	lightcurve = lightcurve.get_df().set_index('oid')
@@ -94,7 +97,6 @@ def get_features(lcobj, lcobj_name, lcset_name, lcset_info,
 			# lccf.WiseStreamExtractor(band_names),
 			])
 		lightcurve, lengths = preprocess_lcobj(lcobj, band_names, thday)
-		# print(lightcurve)
 		features_d = feature_extractor.compute_features(lightcurve).to_dict(orient='index')['']
 		thday_features.update(features_d)
 		thdays_features_list += [thday_features]

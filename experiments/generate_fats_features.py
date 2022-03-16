@@ -21,8 +21,8 @@ print_big_bar()
 import numpy as np
 from fuzzytools.files import load_pickle, save_pickle
 from fuzzytools.files import get_dict_from_filedir
-from lcfats.extractors import get_all_fat_features
-from lcfats.files import save_features
+from lcfeatures.extractors import get_all_fat_features
+from lcfeatures.files import save_features
 
 filedir = f'../../surveys-save/survey=alerceZTFv7.1~bands=gr~mode=onlySNe~method={main_args.method}.splcds'
 filedict = get_dict_from_filedir(filedir)
@@ -42,8 +42,8 @@ for lcset_name in lcset_names:
 	is_kf = '@' in lcset_name and lcset_name.split('@')[0]==main_args.kf
 	if len(lcdataset[lcset_name])>0 and is_kf:
 		thdays_features_df = get_all_fat_features(lcdataset, lcset_name)
-		save_rootdir = f'../save/fats/{cfilename}'
-		save_filedir = f'{save_rootdir}/{lcset_name}.df'
+		save_rootdir = f'../save'
+		save_filedir = f'{save_rootdir}/fats/{cfilename}/{lcset_name}.df'
 		save_features(thdays_features_df, save_filedir)
 	else:
 		pass

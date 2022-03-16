@@ -7,6 +7,16 @@ MIN_DAY = 1
 MAX_DAY = 100
 DEFAULT_DAYS_N = int(MAX_DAY-MIN_DAY+1)
 
+METRICS_D = {
+    f'aucroc':{'k':1, 'mn':'AUCROC'},
+    f'precision':{'k':1, 'mn':'Precision'},
+    f'recall':{'k':1, 'mn':'Recall'},
+    f'f1score':{'k':1, 'mn':'$F_1$score'},
+    f'aucpr':{'k':1, 'mn':'AUCPR'},
+    f'gmean':{'k':1, 'mn':'Gmean'},
+    f'accuracy':{'k':1, 'mn':'Accuracy'},
+    }
+    
 SNE_SELECTED_FEATURES = [
 	'SPM_t0', # *
 	'SPM_A', # *

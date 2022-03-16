@@ -21,9 +21,9 @@ print_big_bar()
 ###################################################################################################################################################
 import numpy as np
 from fuzzytools.files import load_pickle, save_pickle, get_dict_from_filedir
-from lcfats.files import load_features
+from lcfeatures.files import load_features
 from fuzzytools.progress_bars import ProgressBar
-from lcfats.classifiers import train_classifier, evaluate_classifier
+from lcfeatures.classifiers import train_classifier, evaluate_classifier
 import pandas as pd
 
 filedir = f'../../surveys-save/survey=alerceZTFv7.1~bands=gr~mode=onlySNe~method={main_args.method}.splcds'
@@ -60,6 +60,7 @@ for train_mode in train_modes:
 			max_samples=len(train_df_x_r),
 			)
 		d = evaluate_classifier(brf_d, f'../save/fats/{cfilename}/{main_args.kf}@test.df', lcset_info)
+		features_mode = 'all'
 		save_rootdir = f'../save'
-		save_filedir = f'{save_rootdir}/method={main_args.method}~train_mode={train_mode}~fats_mode=all/performance/{cfilename}/{main_args.kf}@test/id={main_args.mid}c{classifier_mid}.d'
+		save_filedir = f'{save_rootdir}/method={main_args.method}~tmode={train_mode}~fmode={features_mode}/performance/{cfilename}/{main_args.kf}@test/id={main_args.mid}c{classifier_mid}.d'
 		save_pickle(save_filedir, d)
