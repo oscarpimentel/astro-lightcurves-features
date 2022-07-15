@@ -35,17 +35,17 @@ print(lcdataset)
 
 lcset_names = lcdataset.get_lcset_names()
 for lcset_name in lcset_names:
-	if main_args.ignore_train and 'train' in lcset_name:
-		continue
-	if main_args.ignore_synth and '.' in lcset_name:
-		continue
-	is_kf = '@' in lcset_name and lcset_name.split('@')[0]==main_args.kf
-	if len(lcdataset[lcset_name])>0 and is_kf:
-		thdays_features_df = get_all_fat_features(lcdataset, lcset_name)
-		save_rootdir = f'../save'
-		save_filedir = f'{save_rootdir}/fats/{cfilename}/{lcset_name}.df'
-		save_features(thdays_features_df, save_filedir)
-	else:
-		pass
+        if main_args.ignore_train and 'train' in lcset_name:
+                continue
+        if main_args.ignore_synth and '.' in lcset_name:
+                continue
+        is_kf = '@' in lcset_name and lcset_name.split('@')[0]==main_args.kf
+        if len(lcdataset[lcset_name])>0 and is_kf:
+                thdays_features_df = get_all_fat_features(lcdataset, lcset_name)
+                save_rootdir = f'../save'
+                save_filedir = f'{save_rootdir}/fats/{cfilename}/{lcset_name}.df'
+                save_features(thdays_features_df, save_filedir)
+        else:
+                pass
 
 

@@ -41,16 +41,16 @@ lcset_name = f'{main_args.kf}@train.{main_args.method}'
 load_rootdir = f'../save/fats/{cfilename}'
 
 for proj_mode,features_mode in [('UMAP', 'all'), ('UMAP', 'spm'), ('PCA', 'spm')]:
-	proj_dict = get_fitted_2dproj(lcdataset, lcset_name, load_rootdir, proj_mode, features_mode)
-	class_names = lcdataset[lcset_name].class_names
-	for target_class in [None]+class_names:
-		fig = plot_2dproj(proj_dict, lcdataset, lcset_name, target_class)
-		train_mode = 'r+s'
-		save_rootdir = f'../save'
-		if target_class is None:
-			save_filedir = f'{save_rootdir}/method={main_args.method}~tmode={train_mode}~fmode={features_mode}/projections/{cfilename}/{lcset_name}/proj_mode={proj_mode}/id={main_args.mid}.pdf'
-		else:
-			save_filedir = f'{save_rootdir}/method={main_args.method}~tmode={train_mode}~fmode={features_mode}/projections/{cfilename}/{lcset_name}/proj_mode={proj_mode}/{target_class}/id={main_args.mid}.pdf'
-		
-		fig.tight_layout()
-		save_fig(fig, save_filedir)
+        proj_dict = get_fitted_2dproj(lcdataset, lcset_name, load_rootdir, proj_mode, features_mode)
+        class_names = lcdataset[lcset_name].class_names
+        for target_class in [None]+class_names:
+                fig = plot_2dproj(proj_dict, lcdataset, lcset_name, target_class)
+                train_mode = 'r+s'
+                save_rootdir = f'../save'
+                if target_class is None:
+                        save_filedir = f'{save_rootdir}/method={main_args.method}~tmode={train_mode}~fmode={features_mode}/projections/{cfilename}/{lcset_name}/proj_mode={proj_mode}/id={main_args.mid}.pdf'
+                else:
+                        save_filedir = f'{save_rootdir}/method={main_args.method}~tmode={train_mode}~fmode={features_mode}/projections/{cfilename}/{lcset_name}/proj_mode={proj_mode}/{target_class}/id={main_args.mid}.pdf'
+                
+                fig.tight_layout()
+                save_fig(fig, save_filedir)
